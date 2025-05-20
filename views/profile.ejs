@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Profile | AnyHunt</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #111;
+      border-radius: 10px;
+      box-shadow: 0 0 25px #e50914aa;
+    }
+
+    .profile-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-header h1 {
+      color: #e50914;
+      font-size: 2.5rem;
+    }
+
+    .info {
+      margin-bottom: 20px;
+    }
+
+    .info label {
+      font-weight: bold;
+      color: #aaa;
+    }
+
+    .info p {
+      margin: 5px 0 15px;
+    }
+
+    .actions {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .actions form {
+      display: inline;
+    }
+
+    .actions button {
+      background-color: #e50914;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin: 10px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .actions button:hover {
+      background-color: #ff1f3d;
+      box-shadow: 0 0 10px #e50914;
+    }
+
+    .content-section {
+      margin-top: 40px;
+    }
+
+    .content-section h2 {
+      color: #e50914;
+      border-bottom: 1px solid #444;
+      padding-bottom: 10px;
+    }
+
+    .content-list {
+      margin-top: 15px;
+    }
+
+    .content-list li {
+      margin: 8px 0;
+      color: #ccc;
+    }
+    .actions .home-btn {
+  display: inline-block;
+  background-color: #e50914;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  margin: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.actions .home-btn:hover {
+  background-color: #ff1f3d;
+  box-shadow: 0 0 10px #e50914;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="profile-header">
+      <h1>User Profile</h1>
+    </div>
+
+    <div class="info">
+      <label>Name:</label>
+      <p><%= user.fullname || 'N/A' %></p>
+
+      <label>Email:</label>
+      <p><%= user.email || 'N/A' %></p>
+
+      <label>Member Since:</label>
+      <p><%= user.createdAt ? user.createdAt.toDateString() : 'N/A' %></p>
+    </div>
+
+    <div class="actions">
+  <a href="/" class="home-btn">Home</a>
+  <button>Edit Profile</button>
+  <form action="/logout" method="POST" style="display:inline;">
+    <button type="submit">Logout</button>
+  </form>
+</div>
+
+
+    <div class="content-section">
+      <h2>My Uploaded Movies</h2>
+      <ul class="content-list">
+        <% content.movies.forEach(movie => { %>
+          <li><%= movie.title %></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

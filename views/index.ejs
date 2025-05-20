@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AnyHunt</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <header>
+    <div class="logo">AnyHunt</div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Movies</a></li>
+        <li><a href="#">TV Shows</a></li>
+      </ul>
+    </nav>
+    <nav>
+  <ul>
+    <li><a href="/">Home</a></li>
+    <li><a href="/downloads">Downloads</a></li>
+    <li><a href="/profile">Profile</a></li>
+  </ul>
+</nav>
+
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Unlimited movies, TV shows, and more on <span>AnyHunt</span>.</h1>
+      <p>Watch anywhere. Cancel anytime.</p>
+    </div>
+  </section>
+
+  <section class="movie-row">
+    <h2>Uploaded Movies</h2>
+    <div class="movie-container">
+      <% content.movies.forEach(movie => { %>
+        <div>
+          <h3><%= movie.title %></h3>
+          <video width="200" height="300" controls>
+            <source src="<%= movie.video %>" type="video/mp4">
+          </video>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+
+  <!-- Static Content Sections Below -->
+<section class="movie-row">
+  <h2>Popular Anime</h2>
+  <div class="movie-container">
+    <% content.anime.forEach(anime => { %>
+      <div>
+        <h3><%= anime.title %></h3>
+        <video width="200" height="300" controls>
+          <source src="<%= anime.video %>" type="video/mp4">
+        </video>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="movie-row">
+  <h2>Trending Movies</h2>
+  <div class="movie-container">
+    <% content.trending.forEach(movie => { %>
+      <div>
+        <h3><%= movie.title %></h3>
+        <video width="200" height="300" controls>
+          <source src="<%= movie.video %>" type="video/mp4">
+        </video>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+
+</body>
+</html>

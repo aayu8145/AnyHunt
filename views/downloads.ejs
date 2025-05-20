@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Downloads | AnyHunt</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #111;
+      padding: 1rem 2rem;
+      box-shadow: 0 0 10px #e50914;
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e50914;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px #e50914;
+      }
+      100% {
+        text-shadow: 0 0 20px #e50914, 0 0 40px #e50914;
+      }
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: '';
+      height: 2px;
+      width: 0%;
+      background: #e50914;
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      transition: 0.3s ease;
+    }
+
+    nav ul li a:hover::after {
+      width: 100%;
+    }
+
+    .movie-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      padding: 2rem;
+    }
+
+    .movie-box {
+      background: #1c1c1c;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .movie-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 0 10px #e50914;
+    }
+
+    .movie-box h3 {
+      margin-bottom: 0.5rem;
+      color: #fff;
+    }
+
+    .movie-box a {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .movie-box a:hover {
+      background: #b20710;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 2rem;
+      color: #e50914;
+      text-shadow: 0 0 10px #e50914;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">AnyHunt</div>
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/downloads">Downloads</a></li>
+        <li><a href="/profile">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <h2>Download Your Favorite Movies</h2>
+  <div class="movie-container">
+    <% content.movies.forEach(movie => { %>
+      <div class="movie-box">
+        <h3><%= movie.title %></h3>
+        <video width="200" controls>
+          <source src="<%= movie.video %>" type="video/mp4">
+        </video>
+        <br/>
+        <a href="<%= movie.video %>" download>⬇ Download</a>
+      </div>
+    <% }) %>
+  </div>
+
+</body>
+</html>

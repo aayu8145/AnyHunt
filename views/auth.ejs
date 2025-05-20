@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <div id="kitten-body">
+    <div id="kitten-ear-left"></div>
+    <div id="kitten-ear-right"></div>
+    <div id="kitten-face">
+      <div id="kitten-eye-left"></div>
+      <div id="kitten-eye-right"></div>
+      <div id="kitten-nose"></div>
+      <div id="kitten-mouth"></div>
+    </div>
+    <div id="kitten-tail"></div>
+  </div>
+</div>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+    body {
+      margin: 0; padding: 0;
+      background: radial-gradient(circle at center, #1a0000 0%, #000 80%);
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: 480px;
+      margin: 130px auto 50px;
+      padding: 40px 30px 50px;
+      background: #111;
+      border-radius: 15px;
+      box-shadow: 0 0 40px #e50914aa;
+      position: relative;
+      z-index: 10;
+      transition: transform 0.6s ease;
+    }
+
+    h2 {
+      text-align: center;
+      color: #e50914;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      text-shadow: 0 0 8px #ff0014;
+      margin-bottom: 30px;
+      user-select: none;
+    }
+
+    form {
+      margin-top: 10px;
+      animation: fadeIn 0.8s ease forwards;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 6px;
+      color: #ccc;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      user-select: none;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 7px;
+      margin-bottom: 20px;
+      background: #222;
+      color: #eee;
+      font-size: 15px;
+      box-shadow: inset 0 0 8px #e5091477;
+      transition: background 0.3s ease;
+      outline-offset: 2px;
+    }
+    input:focus {
+      background: #330000;
+      outline: 2px solid #e50914;
+      color: #fff;
+    }
+
+    button {
+      background-color: #e50914;
+      color: white;
+      border: none;
+      padding: 14px 0;
+      width: 100%;
+      border-radius: 10px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      box-shadow: 0 0 18px #e50914cc;
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    button:hover, button:focus {
+      background-color: #ff1f3d;
+      box-shadow: 0 0 25px #ff1f3d, 0 0 40px #e50914;
+      outline: none;
+    }
+
+    .toggle {
+      text-align: center;
+      margin-top: 18px;
+      cursor: pointer;
+      color: #aaa;
+      font-style: italic;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .toggle:hover, .toggle:focus {
+      color: #fff;
+      outline: none;
+    }
+
+    .error, .success {
+      text-align: center;
+      margin-bottom: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      user-select: none;
+    }
+    .error { color: #ff4d4d; }
+    .success { color: #90ee90; }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+/* <!-- Replace this whole #dragon-container block in your code --> */
+/* 
+<!-- Cute Flying Kitten --> */
+
+
+
+  /* Replace Dragon container with kitten container */
+  #kitten-container {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 50;
+    animation: flyAround 12s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px #ffccff88);
+  }
+
+  /* Kitten body */
+  #kitten-body {
+    position: relative;
+    width: 100px;
+    height: 80px;
+    background: #ffd6e8; /* soft pink */
+    border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
+    box-shadow: 0 0 12px #ff99cc inset;
+    animation: floatUpDown 3s ease-in-out infinite;
+  }
+
+  /* Kitten ears */
+  #kitten-ear-left, #kitten-ear-right {
+    position: absolute;
+    top: -25px;
+    width: 28px;
+    height: 30px;
+    background: #ffb6d9;
+    border-radius: 50% 50% 30% 30% / 60% 60% 40% 40%;
+    box-shadow: 0 0 6px #ff99cc inset;
+    transform-origin: bottom center;
+    animation: earWiggle 4s ease-in-out infinite;
+  }
+
+  #kitten-ear-left {
+    left: 10px;
+    animation-delay: 0s;
+  }
+
+  #kitten-ear-right {
+    right: 10px;
+    animation-delay: 2s;
+  }
+
+  /* Kitten face */
+  #kitten-face {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 60px;
+    height: 50px;
+    background: #fff0f6;
+    border-radius: 50% 50% 55% 55% / 60% 60% 55% 55%;
+    box-shadow: 0 0 10px #ffcce4 inset;
+  }
+
+  /* Kitten eyes */
+  #kitten-eye-left, #kitten-eye-right {
+    position: absolute;
+    top: 15px;
+    width: 10px;
+    height: 10px;
+    background: #664455;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #996688;
+  }
+  #kitten-eye-left {
+    left: 12px;
+  }
+  #kitten-eye-right {
+    right: 12px;
+  }
+
+  /* Kitten nose */
+  #kitten-nose {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    width: 10px;
+    height: 6px;
+    background: #ff6699;
+    border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 8px #ff99cc;
+  }
+
+  /* Kitten mouth */
+  #kitten-mouth {
+    position: absolute;
+    top: 38px;
+    left: 50%;
+    width: 14px;
+    height: 8px;
+    border-bottom: 2px solid #ff6699;
+    border-radius: 0 0 10px 10px;
+    transform: translateX(-50%);
+  }
+
+  /* Kitten tail */
+  #kitten-tail {
+    position: absolute;
+    bottom: 5px;
+    right: -20px;
+    width: 30px;
+    height: 10px;
+    background: #ffd6e8;
+    border-radius: 20px / 50%;
+    box-shadow: 0 0 8px #ff99cc inset;
+    animation: tailSwing 2.5s ease-in-out infinite;
+    transform-origin: left center;
+  }
+
+  /* Animations */
+  @keyframes flyAround {
+    0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    25% { transform: translateX(calc(-50% + 40px)) translateY(-30px) rotate(5deg); }
+    50% { transform: translateX(calc(-50% + 80px)) translateY(0) rotate(0deg); }
+    75% { transform: translateX(calc(-50% + 40px)) translateY(30px) rotate(-5deg); }
+    100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  }
+
+  @keyframes floatUpDown {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  @keyframes earWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(10deg); }
+  }
+
+  @keyframes tailSwing {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(25deg); }
+  }
+</style>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginForm = document.getElementById('login-form');
+      const signupForm = document.getElementById('signup-form');
+      const toggleText = document.getElementById('toggle-text');
+      const toggleBtn = document.querySelector('.toggle');
+
+      function toggleForms() {
+        if (loginForm.style.display === 'none' || loginForm.style.display === '') {
+          loginForm.style.display = 'block';
+          signupForm.style.display = 'none';
+          toggleText.innerText = 'Signup';
+          document.querySelector('h2').innerText = 'Login to AnyHunt';
+        } else {
+          loginForm.style.display = 'none';
+          signupForm.style.display = 'block';
+          toggleText.innerText = 'Login';
+          document.querySelector('h2').innerText = 'Sign up for AnyHunt';
+        }
+      }
+
+      toggleBtn.addEventListener('click', toggleForms);
+      toggleBtn.addEventListener('keypress', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          toggleForms();
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+  <!-- Flying Dragon -->
+  <div id="dragon-container" aria-hidden="true">
+    <div id="dragon">
+      <div id="dragon-head">
+        <div id="dragon-eye"></div>
+        <div id="fire"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container" role="main" aria-label="Login or Signup Form">
+    <h2>Login to AnyHunt</h2>
+
+    <% if (error) { %>
+      <p class="error" role="alert"><%= error %></p>
+    <% } %>
+    <% if (success) { %>
+      <p class="success" role="alert"><%= success %></p>
+    <% } %>
+
+    <!-- Login Form -->
+    <form id="login-form" action="/auth/login" method="POST" autocomplete="on" aria-label="Login form">
+      <label for="email-login">Email</label>
+      <input id="email-login" type="email" name="email" required autocomplete="email" placeholder="your@email.com" />
+
+      <label for="password-login">Password</label>
+      <input id="password-login" type="password" name="password" required autocomplete="current-password" placeholder="********" />
+
+      <button type="submit" aria-label="Login">Login</button>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signup-form" action="/auth/signup" method="POST" style="display:none" autocomplete="on" aria-label="Signup form">
+      <label for="fullname-signup">Full Name</label>
+      <input id="fullname-signup" type="text" name="fullname" required placeholder="John Doe" />
+
+      <label for="email-signup">Email</label>
+      <input id="email-signup" type="email" name="email" required autocomplete="email" placeholder="your@email.com" />
+
+      <label for="password-signup">Password</label>
+      <input id="password-signup" type="password" name="password" required autocomplete="new-password" placeholder="********" />
+
+      <button type="submit" aria-label="Sign Up">Sign Up</button>
+    </form>
+
+    <p class="toggle" role="button" tabindex="0" aria-pressed="false" aria-label="Switch between Login and Signup forms">
+      Switch to <span id="toggle-text">Signup</span>
+    </p>
+  </div>
+</body>
+</html>

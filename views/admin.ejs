@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AnyHunt Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #121212;
+      color: #eee;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1f1f1f;
+      padding: 20px 40px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #e50914;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.8);
+    }
+    section {
+      max-width: 900px;
+      margin: 30px auto;
+      background: #222;
+      padding: 25px 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+    }
+    h2 {
+      margin-bottom: 15px;
+      color: #e50914;
+      letter-spacing: 1.5px;
+    }
+    form {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 25px;
+    }
+    input[type="text"], input[type="file"], select {
+      flex: 1 1 200px;
+      padding: 10px 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      background: #e50914;
+      border: none;
+      color: white;
+      padding: 12px 25px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #b0060f;
+    }
+    .movie-container {
+      display: flex;
+      gap: 25px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .movie-card {
+      background: #333;
+      padding: 15px;
+      border-radius: 8px;
+      width: 220px;
+      box-shadow: 0 4px 10px rgba(229, 9, 20, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+    .movie-card h3 {
+      margin: 12px 0 8px;
+      font-size: 18px;
+      text-align: center;
+      color: #fff;
+    }
+    video {
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      max-width: 100%;
+    }
+    .delete-form {
+      margin-top: 10px;
+      width: 100%;
+      text-align: center;
+    }
+    .delete-form button {
+      background: #ff4444;
+      padding: 8px 18px;
+      font-size: 14px;
+      border-radius: 5px;
+      width: 100%;
+    }
+    .delete-form button:hover {
+      background: #cc0000;
+    }
+  </style>
+</head>
+<body>
+
+<header>AnyHunt Admin Panel</header>
+
+<section>
+  <h2>Upload New Content</h2>
+  <form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="text" name="title" placeholder="Title" required />
+    <select name="category" required>
+      <option value="movies">Movies</option>
+      <option value="tvShows">TV Shows</option>
+      <option value="anime">Anime</option>
+    </select>
+    <input type="file" name="video" accept="video/mp4" required />
+    <button type="submit">Upload</button>
+  </form>
+</section>
+
+<% ['movies', 'tvShows', 'anime'].forEach(category => { %>
+  <section>
+    <h2><%= category === 'tvShows' ? 'TV Shows' : category.charAt(0).toUpperCase() + category.slice(1) %></h2>
+    <div class="movie-container">
+      <% content[category].forEach(item => { %>
+        <div class="movie-card">
+          <h3><%= item.title %></h3>
+          <video controls width="200" height="300">
+            <source src="<%= item.video %>" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <form class="delete-form" action="/admin/delete" method="POST">
+            <input type="hidden" name="id" value="<%= item.id %>" />
+            <input type="hidden" name="category" value="<%= category %>" />
+            <button type="submit">Delete</button>
+          </form>
+        </div>
+      <% }) %>
+    </div>
+  </section>
+<% }) %>
+
+</body>
+</html>
