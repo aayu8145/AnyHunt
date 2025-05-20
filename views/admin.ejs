@@ -4,6 +4,92 @@
   <meta charset="UTF-8" />
   <title>AnyHunt Admin Panel</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  
+
+<style>
+  .user-section {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 25px 30px;
+    margin: 30px auto;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+  }
+
+  .glow-button {
+    background: #e50914;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #e50914, 0 0 20px #e50914;
+    transition: all 0.3s ease;
+  }
+
+  .glow-button:hover {
+    background: #b0060f;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #e50914, 0 0 30px #e50914;
+  }
+
+  .user-list-container {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out forwards;
+    margin-top: 20px;
+  }
+
+  .user-list {
+    list-style: none;
+    padding: 0;
+  }
+
+  .user-item {
+    background: #1f1f1f;
+    padding: 12px 18px;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(229, 9, 20, 0.3);
+    font-size: 15px;
+    color: #eee;
+    backdrop-filter: blur(5px);
+    animation: slideIn 0.4s ease;
+  }
+
+  .online {
+    color: lightgreen;
+    font-weight: bold;
+  }
+
+  .offline {
+    color: grey;
+    font-style: italic;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slideIn {
+    from { transform: translateY(10px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
+
+<script>
+  function toggleUsers() {
+    const userList = document.getElementById('user-list');
+    if (userList.style.display === 'none' || userList.style.display === '') {
+      userList.style.display = 'block';
+      userList.classList.add('fadeIn');
+    } else {
+      userList.style.display = 'none';
+    }
+  }
+</script>
+
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -115,6 +201,30 @@
 <header>AnyHunt Admin Panel</header>
 
 <section>
+  <section class="user-section">
+  <h2>👤 Registered Users</h2>
+  <button onclick="toggleUsers()" class="glow-button">Show/Hide Users</button>
+  <div id="user-list" class="user-list-container">
+    <% if (users && users.length > 0) { %>
+      <ul class="user-list">
+        <% users.forEach(user => { %>
+          <li class="user-item">
+            <strong><%= user.name %></strong> - <%= user.email %> 
+            <% if (user.isLoggedIn) { %>
+              <span class="online">(Online)</span>
+            <% } else { %>
+              <span class="offline">(Offline)</span>
+            <% } %>
+          </li>
+        <% }) %>
+      </ul>
+      <p>Total Users: <%= users.length %></p>
+      <p>Currently Logged In: <%= users.filter(u => u.isLoggedIn).length %></p>
+    <% } else { %>
+      <p>No registered users found.</p>
+    <% } %>
+  </div>
+</section>
   <h2>Upload New Content</h2>
   <form action="/upload" method="POST" enctype="multipart/form-data">
     <input type="text" name="title" placeholder="Title" required />

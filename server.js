@@ -35,7 +35,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
-  cookie: { maxAge: 1000 * 60 * 60 * 24 },
+  cookie: { maxAge: 1000 * 60 * 60 * 24 }, // 1 day
 }));
 
 // Set current user for all views
@@ -83,8 +83,14 @@ app.get('/downloads', (req, res) => {
 });
 
 // Admin Panel
-app.get('/admin', (req, res) => {
-  res.render('admin', { content });
+app.get('/admin', async (req, res) => {
+  try {
+    const users = await User.find().lean();
+    res.render('admin', { content, users });
+  } catch (err) {
+    console.error("Admin page error:", err);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 // Upload Handler
