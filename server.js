@@ -1,3 +1,5 @@
+require('dotenv').config();  // <-- Load .env variables
+
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
@@ -7,11 +9,10 @@ const MongoStore = require('connect-mongo');
 const bcrypt = require('bcryptjs');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
-
-// MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/anyhunt')
+// MongoDB Connection using .env
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log('✅ MongoDB connected'))
   .catch(err => console.error('MongoDB connection error:', err));
 
@@ -28,12 +29,12 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 
-// Sessions
+// Sessions - use secret from .env
 app.use(session({
-  secret: 'yourSecretKey123!',
+  secret: process.env.SESSION_SECRET || 'fallbackSecret',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: 'mongodb://localhost:27017/anyhunt' }),
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: { maxAge: 1000 * 60 * 60 * 24 },
 }));
 
