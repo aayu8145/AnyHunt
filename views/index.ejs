@@ -3,39 +3,218 @@
 <head>
   <meta charset="UTF-8" />
   <title>AnyHunt</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #111;
+      box-shadow: 0 2px 10px rgba(229, 9, 20, 0.4);
+    }
+
+    .logo {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #e50914;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      display: flex;
+      flex-direction: column;
+      background-color: #111;
+      padding: 1rem 2rem;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 8px;
+      background-color: #222;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    .categories button {
+      background-color: #333;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .categories button:hover {
+      background-color: #e50914;
+    }
+
+    .banner {
+      position: relative;
+      background: url('/images/banner.jpg') center/cover no-repeat;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      padding-left: 2rem;
+    }
+
+    .banner-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .banner-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .banner h1 {
+      font-size: 2.5rem;
+    }
+
+    .banner .play-btn {
+      margin-top: 1rem;
+      background-color: #e50914;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .section {
+      padding: 2rem 1rem;
+    }
+
+    .section h2 {
+      color: #e50914;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .movie-row {
+      display: flex;
+      overflow-x: auto;
+      gap: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .movie-card {
+      flex: 0 0 auto;
+      width: 160px;
+      background-color: #111;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(255, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .movie-card img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+
+    .movie-card:hover {
+      transform: scale(1.05);
+    }
+
+    .movie-card h3 {
+      padding: 0.5rem;
+      font-size: 0.95rem;
+      text-align: center;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .banner h1 {
+        font-size: 1.8rem;
+      }
+
+      .movie-card {
+        width: 120px;
+      }
+
+      .movie-card h3 {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
 </head>
 
 <body>
+
   <header>
     <div class="logo">AnyHunt</div>
     <nav>
       <ul>
-        <li><a href="#">Home</a></li>
         <li><a href="#">Movies</a></li>
         <li><a href="#">TV Shows</a></li>
+        <li><a href="/downloads">Downloads</a></li>
+        <li><a href="/profile">Profile</a></li>
       </ul>
     </nav>
-    <nav>
-  <ul>
-    <li><a href="/">Home</a></li>
-    <li><a href="/downloads">Downloads</a></li>
-    <li><a href="/profile">Profile</a></li>
-  </ul>
-</nav>
-
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Unlimited movies, TV shows, and more on <span>AnyHunt</span>.</h1>
-      <p>Watch anywhere. Cancel anytime.</p>
+  <div class="search-bar">
+    <input type="text" placeholder="Search..." />
+    <div class="categories">
+      <button>All</button>
+      <button>Bollywood</button>
+      <button>Hollywood</button>
+      <button>Tamil</button>
+      <button>Telugu</button>
+      <button>Malayalam</button>
+      <button>Anime</button>
+    </div>
+  </div>
+
+  <section class="banner">
+    <div class="banner-overlay"></div>
+    <div class="banner-content">
+      <h1>The Royals [Hindi]</h1>
+      <button class="play-btn">▶ Play</button>
     </div>
   </section>
 
-  <section class="movie-row">
+  <section class="section">
     <h2>Uploaded Movies</h2>
-    <div class="movie-container">
+    <div class="movie-row">
       <% content.movies.forEach(movie => { %>
         <div>
           <h3><%= movie.title %></h3>
@@ -47,12 +226,11 @@
     </div>
   </section>
 
-  <!-- Static Content Sections Below -->
-<section class="movie-row">
-  <h2>Popular Anime</h2>
-  <div class="movie-container">
-    <% content.anime.forEach(anime => { %>
-      <div>
+  <section class="section">
+    <h2>Popular Anime</h2>
+    <div class="movie-row">
+       <% content.anime.forEach(anime => { %>
+        <div>
         <h3><%= anime.title %></h3>
         <video width="200" height="300" controls>
           <source src="<%= anime.video %>" type="video/mp4">
@@ -60,13 +238,13 @@
       </div>
     <% }) %>
   </div>
-</section>
+  </section>
 
-<section class="movie-row">
-  <h2>Trending Movies</h2>
-  <div class="movie-container">
-    <% content.trending.forEach(movie => { %>
-      <div>
+  <section class="section">
+     <h2>Trending Movies</h2>
+    <div class="movie-row">
+       <% content.trending.forEach(movie => { %>
+       <div>
         <h3><%= movie.title %></h3>
         <video width="200" height="300" controls>
           <source src="<%= movie.video %>" type="video/mp4">
@@ -74,8 +252,6 @@
       </div>
     <% }) %>
   </div>
-</section>
-
 
 </body>
 </html>

@@ -67,8 +67,10 @@ let content = {
   movies: [],
   tvShows: [],
   anime: [],
-  trending: []
+  trending: [],
+  languageMovies: []  // ✅ Added this line to avoid the crash
 };
+
 
 // ROUTES =====================
 
@@ -187,3 +189,4 @@ app.post('/logout', (req, res) => {
 app.listen(PORT, () => {
   console.log(`✅ Server running at http://localhost:${PORT}`);
 });
+
